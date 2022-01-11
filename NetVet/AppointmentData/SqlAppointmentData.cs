@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using NetVet.Models;
 
 namespace NetVet.AppointmentData
@@ -17,6 +19,7 @@ namespace NetVet.AppointmentData
         public Appointment AddAppointment(Appointment appointment)
         {
             appointment.Id = Guid.NewGuid();
+            appointment.CreatedAt = DateTime.Today;
             _appointmentContext.Appointments.Add(appointment);
             _appointmentContext.SaveChanges();
             return appointment;
@@ -34,10 +37,12 @@ namespace NetVet.AppointmentData
 
             if (existingAppointment != null)
             {
-                existingAppointment.Date = appointment.Date;
+                existingAppointment.Date = Convert.ToDateTime(appointment.Date.ToString("MM/dd/yyyy"));
                 existingAppointment.PetName = appointment.PetName;
                 existingAppointment.OwnersName = appointment.OwnersName;
                 existingAppointment.ContactDetail = appointment.ContactDetail;
+                existingAppointment.Email = appointment.Email;
+
                 _appointmentContext.Appointments.Update(existingAppointment);
                 _appointmentContext.SaveChanges();
             }
@@ -53,6 +58,18 @@ namespace NetVet.AppointmentData
         public List<Appointment> GetAppointments()
         {
             return _appointmentContext.Appointments.ToList();
+        }
+
+        public async Task<IEnumerable<Appointment>> Search(string PetName)
+        {
+            IQueryable<Appointment> query = _appointmentContext.Appointments;
+
+            if (!string.IsNullOrEmpty(PetName))
+            {
+                query = query.Where(ap => ap.PetName.Contains(PetName));
+            }
+
+            return await query.ToListAsync();
         }
     }
 }

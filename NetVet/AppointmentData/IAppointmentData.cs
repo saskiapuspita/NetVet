@@ -1,13 +1,14 @@
 ﻿using NetVet.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace NetVet.AppointmentData
 {
     public interface IAppointmentData
     {
+        Task<IEnumerable<Appointment>> Search(string PetName);
+
         List<Appointment> GetAppointments();
 
         Appointment GetAppointment(Guid id);

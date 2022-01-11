@@ -25,5 +25,12 @@ namespace NetVet.Models
         [Required]
         [MaxLength(13, ErrorMessage = "Contact Detail can only be 13 characters long")]
         public string ContactDetail { get; set; }
+
+        [Required]
+        [MaxLength(50, ErrorMessage = "Email can only be 50 characters long")]
+        public string Email { get; set; }
+
+        [Display(Name = "Created at")]
+        public DateTime CreatedAt { get; set; }
     }
 }

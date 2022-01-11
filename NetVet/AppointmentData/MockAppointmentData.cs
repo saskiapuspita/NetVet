@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using NetVet.Models;
 
 namespace NetVet.AppointmentData
@@ -57,6 +58,11 @@ namespace NetVet.AppointmentData
         public List<Appointment> GetAppointments()
         {
             return appointments;
+        }
+
+        public Task<IEnumerable<Appointment>> Search(string PetName)
+        {
+            throw new NotImplementedException();
         }
     }
 }
