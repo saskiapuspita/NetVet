@@ -41,5 +41,12 @@ namespace NetVet.Controllers
                 throw;
             }
         }
+
+        [HttpGet]
+        [Route("{page}")]
+        public async Task<ActionResult<IEnumerable<Appointment>>> Pagination([FromQuery] PaginationParams paginationParams)
+        {
+            return await _repository.Pagination(paginationParams);
+        }
     }
 }

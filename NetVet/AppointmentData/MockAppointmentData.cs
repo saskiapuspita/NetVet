@@ -60,6 +60,11 @@ namespace NetVet.AppointmentData
             return appointments;
         }
 
+        public Task<PagedList<Appointment>> Pagination(PaginationParams paginationParams)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<IEnumerable<Appointment>> Search(string PetName)
         {
             throw new NotImplementedException();

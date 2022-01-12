@@ -60,6 +60,11 @@ namespace NetVet.AppointmentData
             return _appointmentContext.Appointments.ToList();
         }
 
+        public Task<PagedList<Appointment>> Pagination(PaginationParams paginationParams)
+        {
+            return Task.FromResult(PagedList<Appointment>.GetPagedList(FindAll().OrderBy(s => s.Id), paginationParams.pageNumber, paginationParams.pageSize));
+        }
+
         public async Task<IEnumerable<Appointment>> Search(string PetName)
         {
             IQueryable<Appointment> query = _appointmentContext.Appointments;
@@ -70,6 +75,11 @@ namespace NetVet.AppointmentData
             }
 
             return await query.ToListAsync();
+        }
+
+        public IQueryable<Appointment> FindAll()
+        {
+            return _appointmentContext.Set<Appointment>().AsNoTracking();
         }
     }
 }

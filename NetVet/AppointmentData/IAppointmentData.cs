@@ -7,6 +7,8 @@ namespace NetVet.AppointmentData
 {
     public interface IAppointmentData
     {
+        Task<PagedList<Appointment>> Pagination(PaginationParams paginationParams);
+
         Task<IEnumerable<Appointment>> Search(string PetName);
 
         List<Appointment> GetAppointments();
