@@ -65,13 +65,18 @@ namespace NetVet.AppointmentData
             return Task.FromResult(PagedList<Appointment>.GetPagedList(FindAll().OrderBy(s => s.Id), paginationParams.pageNumber, paginationParams.pageSize));
         }
 
-        public async Task<IEnumerable<Appointment>> Search(string PetName)
+        public async Task<IEnumerable<Appointment>> Search(string searchString, DateTime dateTime)
         {
             IQueryable<Appointment> query = _appointmentContext.Appointments;
 
-            if (!string.IsNullOrEmpty(PetName))
+            if (!String.IsNullOrEmpty(searchString))
             {
-                query = query.Where(ap => ap.PetName.Contains(PetName));
+                query = query.Where(ap => ap.PetName.Contains(searchString));
+            }
+
+            if (!((DateTime?)null).HasValue)
+            {
+                query = query.Where(ap => ap.Date == dateTime);
             }
 
             return await query.ToListAsync();
