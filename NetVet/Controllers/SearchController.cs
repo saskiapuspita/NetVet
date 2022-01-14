@@ -22,7 +22,7 @@ namespace NetVet.Controllers
 
         [HttpGet]
         [Route("{search}")]
-        public async Task<ActionResult<IEnumerable<Appointment>>> Search(string searchString, DateTime dateTime)
+        public async Task<ActionResult<IEnumerable<Appointment>>> Search(string searchString, DateTime? dateTime)
         {
             try
             {

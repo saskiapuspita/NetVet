@@ -9,7 +9,7 @@ namespace NetVet.AppointmentData
     {
         Task<PagedList<Appointment>> Pagination(PaginationParams paginationParams);
 
-        Task<IEnumerable<Appointment>> Search(string searchString, DateTime dateTime);
+        Task<IEnumerable<Appointment>> Search(string searchString, DateTime? dateTime);
 
         List<Appointment> GetAppointments();
 

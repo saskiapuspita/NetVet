@@ -65,7 +65,7 @@ namespace NetVet.AppointmentData
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Appointment>> Search(string searchString, DateTime dateTime)
+        public Task<IEnumerable<Appointment>> Search(string searchString, DateTime? dateTime)
         {
             throw new NotImplementedException();
         }
